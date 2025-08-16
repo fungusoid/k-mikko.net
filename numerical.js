@@ -307,6 +307,63 @@ document.addEventListener('DOMContentLoaded', () => {
     rotateLeftBtn.addEventListener('click', performRotateLeft);
     rotateRightBtn.addEventListener('click', performRotateRight);
 
+    // --- Endianness Demo ---
+    const endianInput = document.getElementById('endian-input');
+    const bigEndianOutput = document.getElementById('big-endian-output');
+    const littleEndianOutput = document.getElementById('little-endian-output');
+    const systemEndiannessCheck = document.getElementById('system-endianness-check').querySelector('p');
+
+    function renderEndianness() {
+        // Sanitize the input for processing, but don't format the input field itself here.
+        let hex = endianInput.value.replace(/[^0-9a-fA-F]/g, '').substring(0, 8);
+
+        // For the visualization, use a padded version of the hex string.
+        const displayHex = hex.padStart(8, '0');
+        
+        const bytes = [];
+        for (let i = 0; i < displayHex.length; i += 2) {
+            bytes.push(displayHex.substring(i, i + 2));
+        }
+
+        // Big-Endian
+        bigEndianOutput.innerHTML = '';
+        bytes.forEach((byte, index) => {
+            const cell = document.createElement('div');
+            cell.className = 'memory-cell';
+            cell.innerHTML = `<span class="address">${index}</span><span class="value">${byte.toUpperCase()}</span>`;
+            bigEndianOutput.appendChild(cell);
+        });
+
+        // Little-Endian
+        littleEndianOutput.innerHTML = '';
+        bytes.slice().reverse().forEach((byte, index) => {
+            const cell = document.createElement('div');
+            cell.className = 'memory-cell';
+            cell.innerHTML = `<span class="address">${index}</span><span class="value">${byte.toUpperCase()}</span>`;
+            littleEndianOutput.appendChild(cell);
+        });
+    }
+
+    // This function formats the input field value when the user is done editing.
+    function formatEndianInput() {
+        let hex = endianInput.value.replace(/[^0-9a-fA-F]/g, '').substring(0, 8);
+        endianInput.value = hex.toUpperCase().padStart(8, '0');
+    }
+
+    function checkSystemEndianness() {
+        const buffer = new ArrayBuffer(2);
+        new DataView(buffer).setInt16(0, 256, true); // true for little-endian
+        // Int16Array uses the platform's endianness.
+        const isLittleEndian = new Int16Array(buffer)[0] === 256;
+        systemEndiannessCheck.textContent = isLittleEndian ? 'Little-Endian' : 'Big-Endian';
+    }
+
+    // Update visualization on every keystroke.
+    endianInput.addEventListener('input', renderEndianness);
+    // Format the input value when the user clicks away.
+    endianInput.addEventListener('change', formatEndianInput);
+
+
     // Initial renders for all calculators
     renderUnsignedByteCalculator();
     renderSignedByteCalculator();
@@ -314,4 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
     convertBases();
     renderLogicalCalculator();
     renderShiftRotateCalculator();
+    renderEndianness();
+    checkSystemEndianness();
 });
