@@ -1,0 +1,43 @@
+/* Sorting Algorithms Page Styles */
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color:#f8fafc; 
+    color:#1e293b; 
+}
+
+.concept-card { 
+    background:#fff; 
+    border-radius:0.75rem; 
+    padding:2rem; 
+    box-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); 
+    margin-bottom:2rem; 
+}
+
+.code-block { 
+    background:#e2e8f0; 
+    border-radius:.5rem; 
+    padding:1rem; 
+    font-family: ui-monospace, monospace; 
+    white-space: pre; 
+    overflow:auto; 
+    font-size:.9rem; 
+    color:#0f172a; 
+}
+
+.bar { 
+    background:#94a3b8; 
+    border-radius:.25rem .25rem 0 0; 
+    transition:height .08s linear, background .08s linear; 
+}
+
+.bar.active { 
+    background:#f59e0b; 
+}
+
+.bar.swap { 
+    background:#ef4444; 
+}
+
+.bar.sorted { 
+    background:#10b981; 
+}

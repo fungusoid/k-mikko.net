@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mandelbrot Explorer</title>
+  
+  <!-- Custom Styles -->
+  <link href="./mandelbrot.css" rel="stylesheet">
+  <link href="./styles.css" rel="stylesheet">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+</head>
+<body>
+
+  <nav class="minimal">
+    <ul>
+        <li><a href="./index.html">Mikko K&auml;renlampi</a></li>
+        <li><a href="./numerical.html">Numerical Concepts</a></li>
+        <li><a href="./sorting.html">Sorting Algorithms</a></li>
+        <li><a href="./stats.html">Basic Statistics</a></li>
+        <li><a href="./mandelbrot.html">Mandelbrot Fractal</a></li>
+    </ul>
+  </nav>
+
+  <canvas id="canvas"></canvas>
+
+  <div id="ui">
+    <button id="randColors" title="Generate a new random color palette">Randomize colors</button>
+    <button id="reset" title="Reset to the default view">Reset view</button>
+    <label style="display:flex;align-items:center;gap:.25rem;color:#000;font-size:.8rem;">
+      Quality:
+      <select id="quality">
+        <option value="fast">Fast</option>
+        <option value="medium" selected="">Medium</option>
+        <option value="high">High</option>
+      </select>
+    </label>
+  </div>
+  <div id="info"></div>
+  <div id="loading">Rendering...</div>
+
+  <script src="./mandelbrot.js"></script>
+</body>
+</html>

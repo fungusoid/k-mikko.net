@@ -1,0 +1,78 @@
+/* Mandelbrot Explorer Styles */
+:root {
+    --bg:#111;
+    --fg:#eee;
+    font-family: system-ui, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+canvas {
+    position: fixed;
+    /* Adjust top position and height to make space for the menu */
+    top: 38px;
+    left: 0;
+    display: block;
+    width: 100vw; /* Full viewport width */
+    height: calc(100vh - 38px); /* Full height minus the menu height */
+}
+
+#canvas {
+    cursor: zoom-in; /* Indicates the area is zoomable */
+    z-index: 0;
+}
+
+#ui {
+    position: fixed;
+    /* Adjust top position to account for the menu */
+    top: 48px;
+    left: 10px;
+    display: flex;
+    gap: .5rem;
+    z-index: 10;
+}
+
+button {
+    padding: .45rem .9rem;
+    background: #333;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: .9rem;
+    transition: background 0.2s ease; /* Smooth hover effect */
+}
+
+button:hover {
+    background: #444;
+}
+
+#info {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: .75rem;
+    background: rgba(0,0,0,.55);
+    padding: .35rem .6rem;
+    border-radius: 4px;
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: 10;
+}
+
+#loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: none; /* Hidden by default, shown during rendering */
+    z-index: 100; /* Ensure it's on top */
+}

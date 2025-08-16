@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sorting Algorithms Visualized</title>
+<link href="./tw.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!-- Custom Styles -->
+<link href="./sorting.css" rel="stylesheet">
+<link href="./styles.css" rel="stylesheet">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+</head>
+<body>
+
+<nav class="minimal">
+  <ul>
+        <li><a href="./index.html">Mikko K&auml;renlampi</a></li>
+        <li><a href="./numerical.html">Numerical Concepts</a></li>
+        <li><a href="./sorting.html">Sorting Algorithms</a></li>
+        <li><a href="./stats.html">Basic Statistics</a></li>
+        <li><a href="./mandelbrot.html">Mandelbrot Fractal</a></li>
+  </ul>
+</nav>
+
+
+
+
+<div class="container mx-auto p-4 max-w-6xl">
+<header class="text-center mb-12">
+<h1 class="text-4xl font-bold">Sorting Algorithms Visualized</h1>
+<p class="text-lg text-slate-600">Insertion • Quick • Merge • Bucket</p>
+</header>
+<section class="concept-card">
+<h2 class="text-2xl font-bold mb-4">Interactive Visualizer</h2>
+<div id="stage" class="h-72 w-full bg-slate-100 border border-slate-200 rounded-lg p-2 flex items-end justify-center"></div>
+<div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 items-end">
+  <div class="flex gap-2 items-center">
+    <label class="label w-28">Algorithm</label>
+    <select id="algo" class="border p-2 rounded w-full">
+      <option value="insertion">Insertion sort</option>
+      <option value="quick">Quick sort</option>
+      <option value="merge">Merge sort</option>
+      <option value="bucket">Bucket (counting) sort</option>
+    </select>
+  </div>
+  <div class="flex gap-3 items-center">
+    <label for="speed" class="label w-28">Speed</label>
+    <input id="speed" type="range" min="10" max="300" value="60" class="w-full" />
+    <span id="speedLabel" class="label w-12 text-right">60ms</span>
+  </div>
+  <div class="flex gap-2">
+    <button id="play" class="btn btn-primary grow">Play</button>
+    <button id="shuffle" class="btn btn-muted">Shuffle</button>
+  </div>
+  <div class="flex gap-2 items-center sm:col-span-3">
+    <span class="label">Steps:</span>
+    <span id="stepCount" class="label font-semibold">0</span>
+  </div>
+</div>
+<p id="status" class="mt-2 text-sm text-slate-500"></p>
+</section>
+
+<section class="concept-card">
+<h2 class="text-2xl font-bold mb-4">Python Implementations</h2>
+<h3 class="text-xl font-semibold mb-2">Insertion Sort</h3>
+<pre class="code-block">def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key</pre>
+<br />
+<h3 class="text-xl font-semibold mb-2">Quick Sort (Median-of-Three Pivot)</h3>
+<pre class="code-block">def quick_sort(arr):
+    def median_of_three(lo, hi):
+        mid = (lo + hi) // 2
+        triple = [(arr[lo], lo), (arr[mid], mid), (arr[hi], hi)]
+        triple.sort(key=lambda x: x[0])
+        return triple[1][1]
+
+    def qs(lo, hi):
+        if lo >= hi:
+            return
+        pivot_index = median_of_three(lo, hi)
+        arr[pivot_index], arr[hi] = arr[hi], arr[pivot_index]
+        pivot = arr[hi]
+        i = lo
+        for j in range(lo, hi):
+            if arr[j] <= pivot:
+                arr[i], arr[j] = arr[j], arr[i]
+                i += 1
+        arr[i], arr[hi] = arr[hi], arr[i]
+        qs(lo, i - 1)
+        qs(i + 1, hi)
+
+    qs(0, len(arr) - 1)</pre>
+<br />
+<h3 class="text-xl font-semibold mb-2">Merge Sort</h3>
+<pre class="code-block">def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        left = arr[:mid]
+        right = arr[mid:]
+        merge_sort(left)
+        merge_sort(right)
+
+        i = j = k = 0
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                arr[k] = left[i]
+                i += 1
+            else:
+                arr[k] = right[j]
+                j += 1
+            k += 1
+
+        while i < len(left):
+            arr[k] = left[i]
+            i += 1
+            k += 1
+        while j < len(right):
+            arr[k] = right[j]
+            j += 1
+            k += 1</pre>
+<br />
+<h3 class="text-xl font-semibold mb-2">Bucket (Counting) Sort</h3>
+<pre class="code-block">def counting_sort(arr):
+    if not arr:
+        return arr
+    k = max(arr)  # assumes non-negative integers
+    counts = [0] * (k + 1)
+    for x in arr:
+        counts[x] += 1
+    i = 0
+    for v, c in enumerate(counts):
+        for _ in range(c):
+            arr[i] = v
+            i += 1</pre>
+</section>
+
+<section class="concept-card">
+<h2 class="text-2xl font-bold mb-4">Time & Space Complexity</h2>
+<p class="mb-4 text-slate-600"><strong>Stable</strong> means that if two elements have the same key or value, they keep the same relative order in the output as in the input.</p>
+<div class="overflow-x-auto">
+<table class="min-w-full text-left text-sm">
+<thead class="bg-slate-100">
+<tr>
+<th class="p-2">Algorithm</th>
+<th class="p-2">Best</th>
+<th class="p-2">Average</th>
+<th class="p-2">Worst</th>
+<th class="p-2">Space</th>
+<th class="p-2">Stable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-t"><td class="p-2">Insertion</td><td class="p-2">O(n)</td><td class="p-2">O(n²)</td><td class="p-2">O(n²)</td><td class="p-2">O(1)</td><td class="p-2">Yes</td></tr>
+<tr class="border-t"><td class="p-2">Quick</td><td class="p-2">O(n log n)</td><td class="p-2">O(n log n)</td><td class="p-2">O(n²)</td><td class="p-2">O(1)</td><td class="p-2">No</td></tr>
+<tr class="border-t"><td class="p-2">Merge</td><td class="p-2">O(n log n)</td><td class="p-2">O(n log n)</td><td class="p-2">O(n log n)</td><td class="p-2">O(n)</td><td class="p-2">Yes</td></tr>
+<tr class="border-t"><td class="p-2">Bucket</td><td class="p-2">O(n + k)</td><td class="p-2">O(n + k)</td><td class="p-2">O(n + k)</td><td class="p-2">O(k)</td><td class="p-2">*</td></tr>
+</tbody>
+</table>
+<p class="text-xs text-slate-500 mt-2">* Bucket Sort: Stable if implemented with cumulative counts (stable placement). Here, <em>k</em> is the range of distinct integer keys (max value − min value + 1).</p>
+</div>
+</section>
+
+<script src="./sorting.js"></script>
+</div>
+</body>
+</html>

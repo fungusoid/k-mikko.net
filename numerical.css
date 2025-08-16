@@ -1,0 +1,117 @@
+/* Numerical Concepts Page Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc; /* slate-50 */
+    color: #1e293b; /* slate-800 */
+}
+
+.concept-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(21, 7, 7, 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    margin-bottom: 2rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.concept-card:hover {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+h1, h2, h3 {
+    color: #0f172a; /* slate-900 */
+}
+
+.bit-switch {
+    width: 45px;
+    height: 80px;
+    background-color: #e2e8f0; /* slate-200 */
+    border: 2px solid #cbd5e1; /* slate-300 */
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+    font-weight: 500;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.bit-switch.on {
+    background-color: #22c55e; /* green-500 */
+    color: white;
+    border-color: #16a34a; /* green-600 */
+}
+
+/* Custom colors for float parts */
+.bit-switch.sign-bit.on { background-color: #ef4444; border-color: #dc2626; } /* red-500 */
+.bit-switch.exponent-bit.on { background-color: #3b82f6; border-color: #2563eb; } /* blue-500 */
+.bit-switch.mantissa-bit.on { background-color: #f97316; border-color: #ea580c; } /* orange-500 */
+
+.bit-value {
+    font-size: 0.75rem;
+    color: #64748b; /* slate-500 */
+    position: absolute;
+    bottom: -20px;
+}
+
+.bit-switch.on .bit-value {
+    color: #1e293b;
+}
+
+.output-box {
+    background-color: #f1f5f9; /* slate-100 */
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-family: monospace;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #e2e8f0; /* slate-200 */
+    word-wrap: break-word;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #4f46e5; /* indigo-600 */
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #4338ca; /* indigo-700 */
+}
+
+select {
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    border: 1px solid #cbd5e1;
+}
+
+.bit-group {
+    border: 2px solid;
+    border-radius: 0.5rem;
+    padding: 1rem 0.5rem;
+    margin-top: 1rem;
+}
+
+.code-block {
+    background-color: #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.9rem;
+    color: #1e293b;
+}

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numerical Concepts and Operations - Extended</title>
+    <link href="./tw.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link href="./numerical.css" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+</head>
+<body class="antialiased">
+
+<nav class="minimal">
+  <ul>
+        <li><a href="./index.html">Mikko K&auml;renlampi</a></li>
+        <li><a href="./numerical.html">Numerical Concepts</a></li>
+        <li><a href="./sorting.html">Sorting Algorithms</a></li>
+        <li><a href="./stats.html">Basic Statistics</a></li>
+        <li><a href="./mandelbrot.html">Mandelbrot Fractal</a></li>
+  </ul>
+</nav>
+
+
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2">A Beginner's Guide to Numerical Concepts</h1>
+            <p class="text-lg text-slate-600">Understanding the building blocks of digital information.</p>
+        </header>
+
+        <!-- Introduction -->
+        <section id="intro" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Why Learn This?</h2>
+            <p class="text-slate-700 leading-relaxed">In our digital world, everything from your phone to your car runs on computers. At their core, computers speak a language of numbers. Understanding concepts like binary, signed integers, and floating-point numbers isn't just for programmers; it gives you a fundamental insight into how technology works. It helps demystify computers and empowers you to understand topics like networking, data storage, and digital color representation.</p>
+        </section>
+
+        <!-- Bits, Bytes, and Words -->
+        <section id="bits-bytes" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Bits, Bytes, and Words</h2>
+            <div class="text-slate-700 leading-relaxed space-y-4">
+                <p>The most basic unit of information in computing is a <strong>bit</strong>. A bit can only have one of two values: 0 or 1. Think of it like a light switch that can be either off (0) or on (1).</p>
+                <p>A <strong>byte</strong> is an ordered collection of 8 bits. By grouping bits together, we can represent more complex information. With 8 bits, there are 2<sup>8</sup> (or 256) possible combinations, from 00000000 to 11111111.</p>
+                <p>A <strong>word</strong> is a larger group of bits, and its size depends on the computer's architecture. Common word sizes are 16, 32, or 64 bits. A larger word size allows a computer to process more data at once.</p>
+            </div>
+        </section>
+
+        <!-- NEW: Data Units (Kilo, Mega, Tera) -->
+        <section id="data-units" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Data Units: Kilo, Mega, Giga, Tera</h2>
+            <div class="text-slate-700 leading-relaxed space-y-4">
+                <p>When we talk about file sizes or storage capacity, we often use prefixes like kilo, mega, and giga. However, there's a common point of confusion: whether these prefixes refer to powers of 1000 or powers of 1024.</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>Decimal (SI) Prefixes:</strong> These are based on powers of 1000, used in general science and engineering.
+                        <ul class="list-circle list-inside ml-4">
+                            <li>1 kilobyte (KB) = 10<sup>3</sup> bytes = 1,000 bytes</li>
+                            <li>1 megabyte (MB) = 10<sup>6</sup> bytes = 1,000,000 bytes</li>
+                            <li>1 gigabyte (GB) = 10<sup>9</sup> bytes = 1,000,000,000 bytes</li>
+                            <li>1 terabyte (TB) = 10<sup>12</sup> bytes = 1,000,000,000,000 bytes</li>
+                        </ul>
+                        Hard drive manufacturers typically use these decimal prefixes.
+                    </li>
+                    <li><strong>Binary (IEC) Prefixes:</strong> These are based on powers of 1024 (2<sup>10</sup>), which are more natural for computer memory addressing. They have slightly different names:
+                        <ul class="list-circle list-inside ml-4">
+                            <li>1 kibibyte (KiB) = 2<sup>10</sup> bytes = 1,024 bytes</li>
+                            <li>1 mebibyte (MiB) = 2<sup>20</sup> bytes = 1,048,576 bytes</li>
+                            <li>1 gibibyte (GiB) = 2<sup>30</sup> bytes = 1,073,741,824 bytes</li>
+                            <li>1 tebibyte (TiB) = 2<sup>40</sup> bytes = 1,099,511,627,776 bytes</li>
+                        </ul>
+                        Operating systems often report file sizes using these binary prefixes (though sometimes still using the "KB" or "MB" notation, which can be confusing).
+                    </li>
+                </ul>
+                <p>The distinction explains why a "1 TB" hard drive might appear as "0.909 TB" or "931 GB" in your operating system – it's because the OS is using the 1024-based calculation.</p>
+            </div>
+        </section>
+
+        <!-- Unsigned Binary Numbers -->
+        <section id="binary-calculator" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Unsigned Binary Numbers (Base-2)</h2>
+            <p class="text-slate-700 leading-relaxed mb-6">Computers use the binary system because it's easy to represent with physical hardware (on/off, high/low voltage). Each position in a binary number represents a power of 2, starting from the right (2<sup>0</sup>, 2<sup>1</sup>, 2<sup>2</sup>, etc.). This example shows an unsigned integer, where all bits contribute to the magnitude.</p>
+            
+            <h3 class="text-xl font-semibold mb-4 text-center">Interactive Unsigned Byte</h3>
+            <p class="text-center text-slate-600 mb-6">Click the switches below to turn bits on (1) or off (0) and see how the decimal and hexadecimal values change.</p>
+
+            <div id="byte-calculator" class="flex justify-center items-end flex-wrap space-x-2 md:space-x-3 mb-6">
+                <!-- Bits will be generated by JS -->
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <h3 class="font-semibold mb-2 text-center">Decimal Value (Base-10)</h3>
+                    <div id="decimal-output" class="output-box">0</div>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2 text-center">Hexadecimal Value (Base-16)</h3>
+                    <div id="hex-output" class="output-box">00</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: Signed Integers (Two's Complement) -->
+        <section id="signed-int-calculator" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Signed Integers (Two's Complement)</h2>
+            <p class="text-slate-700 leading-relaxed mb-6">How do computers store negative numbers? The most common method is <strong>Two's Complement</strong>. In this system, the leftmost bit is the "sign bit". If it's 0, the number is positive and calculated normally. If it's 1, the number is negative. To find the value of a negative number, you invert all the bits (a NOT operation), add one, and then make the result negative.</p>
+            
+            <h3 class="text-xl font-semibold mb-4 text-center">Interactive Signed Byte</h3>
+            <p class="text-center text-slate-600 mb-6">The leftmost bit determines the sign. An 8-bit signed integer can represent numbers from -128 to 127.</p>
+
+            <div id="signed-byte-calculator" class="flex justify-center items-end flex-wrap space-x-2 md:space-x-3 mb-6">
+                <!-- Bits will be generated by JS -->
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+                <div>
+                    <h3 class="font-semibold mb-2 text-center">Decimal Value (Two's Complement)</h3>
+                    <div id="signed-decimal-output" class="output-box">0</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: Floating-Point Numbers -->
+        <section id="float-calculator" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Floating-Point Numbers (Half-Precision)</h2>
+            <p class="text-slate-700 leading-relaxed mb-6">For numbers with fractions (like 3.14159), computers use a format called <strong>floating-point</strong>. It's similar to scientific notation, splitting the number into a sign, an exponent, and a fractional part (mantissa). This demo uses the 16-bit "half-precision" format (1 sign bit, 5 exponent bits, 10 mantissa bits). The formula is: <strong>(-1)<sup>Sign</sup> x 2<sup>(Exponent - 15)</sup> x (1 + Mantissa)</strong>. The '15' is the exponent bias.</p>
+
+            <div class="flex flex-col items-center">
+                <!-- Sign Bit -->
+                <div class="bit-group border-red-400 w-full md:w-auto">
+                    <h4 class="font-semibold text-center text-red-600">Sign (1 bit)</h4>
+                    <div id="float-sign-bit" class="flex justify-center items-end space-x-2 md:space-x-3 mt-2"></div>
+                </div>
+                
+                <!-- Exponent Bits -->
+                <div class="bit-group border-blue-400 w-full">
+                     <h4 class="font-semibold text-center text-blue-600">Exponent (5 bits)</h4>
+                    <div id="float-exponent-bits" class="flex justify-center items-end flex-wrap space-x-2 md:space-x-3 mt-2"></div>
+                </div>
+
+                <!-- Mantissa Bits -->
+                <div class="bit-group border-orange-400 w-full">
+                     <h4 class="font-semibold text-center text-orange-600">Mantissa (10 bits)</h4>
+                    <div id="float-mantissa-bits" class="flex justify-center items-end flex-wrap space-x-2 md:space-x-3 mt-2"></div>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <h3 class="font-semibold mb-2 text-center">Resulting Value</h3>
+                <div id="float-output" class="output-box text-lg">0</div>
+                <p id="float-calculation-info" class="text-center text-sm text-slate-600 mt-2 h-4"></p>
+            </div>
+        </section>
+
+        <!-- Number Bases -->
+        <section id="number-bases" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Understanding Number Bases</h2>
+            <div class="text-slate-700 leading-relaxed space-y-4">
+                <p>We're used to the <strong>decimal</strong> (base-10) system, which uses ten digits (0-9). Other bases are common in computing:</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>Binary (Base-2):</strong> Uses two digits (0 and 1). This is the native language of computers.</li>
+                    <li><strong>Hexadecimal (Base-16):</strong> Uses sixteen symbols: 0-9 and A-F, where A=10, B=11, C=12, D=13, E=14, and F=15. Hex is widely used because it's a very compact way to represent a byte. One hex digit can represent 4 bits (a "nibble"), so two hex digits perfectly represent one byte.</li>
+                    <li><strong>Octal (Base-8):</strong> Uses eight digits (0-7). Presents 3 bits. It was more common in the past as an easier way to read binary.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Base Converter -->
+        <section id="base-converter" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Universal Number Base Converter</h2>
+            <p class="text-slate-700 leading-relaxed mb-6">This tool lets you convert a number from any of the common bases to all the others. Try converting your age to binary or your zip code to hexadecimal!</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                <div>
+                    <label for="fromBase" class="block font-semibold mb-2">Convert From:</label>
+                    <select id="fromBase" class="w-full">
+                        <option value="10">Decimal (Base-10)</option>
+                        <option value="2">Binary (Base-2)</option>
+                        <option value="16">Hexadecimal (Base-16)</option>
+                        <option value="8">Octal (Base-8)</option>
+                    </select>
+                    <input type="text" id="numberInput" class="w-full mt-2 p-2 border border-slate-300 rounded-md" placeholder="Enter number...">
+                    <p id="inputError" class="text-red-500 text-sm mt-1 h-4"></p>
+                </div>
+                <div class="space-y-4 mt-4 md:mt-0">
+                    <div>
+                        <h4 class="font-semibold text-slate-600">Decimal (Base-10):</h4>
+                        <p id="outputDecimal" class="output-box text-base p-2">-</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-slate-600">Binary (Base-2):</h4>
+                        <p id="outputBinary" class="output-box text-base p-2 break-all">-</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-slate-600">Hexadecimal (Base-16):</h4>
+                        <p id="outputHex" class="output-box text-base p-2">-</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-slate-600">Octal (Base-8):</h4>
+                        <p id="outputOctal" class="output-box text-base p-2">-</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logical Operations -->
+        <section id="logical-ops" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Logical (Bitwise) Operations</h2>
+            <p class="text-slate-700 leading-relaxed mb-6">Logical operations work on individual bits. They are fundamental to how computers make decisions and perform calculations. Here you can see how they work by comparing two bytes bit-by-bit.</p>
+
+            <div class="bg-slate-100 p-4 rounded-lg mb-8">
+                <h3 class="text-lg font-semibold mb-3">Operation Definitions</h3>
+                <dl class="space-y-3">
+                    <div>
+                        <dt class="font-semibold text-slate-800">AND</dt>
+                        <dd class="text-slate-600 ml-4">The result bit is 1 (true) only if <strong>both</strong> input bits are 1.</dd>
+                    </div>
+                    <div>
+                        <dt class="font-semibold text-slate-800">OR</dt>
+                        <dd class="text-slate-600 ml-4">The result bit is 1 (true) if <strong>either</strong> of the input bits is 1.</dd>
+                    </div>
+                    <div>
+                        <dt class="font-semibold text-slate-800">XOR (Exclusive OR)</dt>
+                        <dd class="text-slate-600 ml-4">The result bit is 1 (true) if the input bits are <strong>different</strong> (one is 0 and one is 1).</dd>
+                    </div>
+                     <div>
+                        <dt class="font-semibold text-slate-800">NOT</dt>
+                        <dd class="text-slate-600 ml-4">This operation takes only one input. It simply <strong>inverts</strong> the bit: 1 becomes 0, and 0 becomes 1.</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <!-- Byte A -->
+            <h3 class="text-lg font-semibold mb-2 text-center">Byte A</h3>
+            <div id="logical-byte-a" class="flex justify-center items-end flex-wrap space-x-2 md:space-x-3 mb-4"></div>
+
+            <!-- Operation Selector -->
+            <div class="flex justify-center my-6">
+                <select id="logical-op-selector" class="text-xl font-bold">
+                    <option value="AND">AND</option>
+                    <option value="OR">OR</option>
+                    <option value="XOR">XOR</option>
+                </select>
+            </div>
+            
+            <!-- Byte B -->
+            <h3 class="text-lg font-semibold mb-2 text-center">Byte B</h3>
+            <div id="logical-byte-b" class="flex justify-center items-end flex-wrap space-x-2 md:space-x-3 mb-6"></div>
+
+            <hr class="my-6 border-slate-300">
+
+            <!-- Result -->
+            <h3 class="text-xl font-semibold mb-4 text-center">Result</h3>
+            <div id="logical-result" class="flex justify-center items-end flex-wrap space-x-2 md:space-x-3 mb-4"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <h3 class="font-semibold mb-2 text-center">Result (Decimal)</h3>
+                    <div id="logical-decimal-output" class="output-box">0</div>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2 text-center">Result (Hex)</h3>
+                    <div id="logical-hex-output" class="output-box">00</div>
+                </div>
+            </div>
+            
+            <!-- NOT Operation -->
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-center">NOT Operation</h3>
+            <p class="text-slate-700 text-center leading-relaxed mb-6">The NOT operation is unique because it only takes one input and inverts all its bits (0 becomes 1, 1 becomes 0). The result of NOT on Byte A is shown below.</p>
+            <div id="logical-not-result" class="flex justify-center items-end flex-wrap space-x-2 md:space-x-3 mb-4"></div>
+
+        </section>
+
+        <!-- NEW: Even / Odd Test -->
+        <section id="even-odd-test" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Even / Odd Test with Bitwise AND</h2>
+            <p class="text-slate-700 leading-relaxed mb-6">A quick and efficient way to check if a number is even or odd in binary is by using the bitwise AND operator with the number 1. This works because:</p>
+            <ul class="list-disc list-inside space-y-2 mb-4">
+                <li>An <strong>even</strong> number always has its least significant bit (the rightmost bit, representing 2<sup>0</sup> = 1) as 0.</li>
+                <li>An <strong>odd</strong> number always has its least significant bit as 1.</li>
+            </ul>
+            <p class="text-slate-700 leading-relaxed mb-6">When you perform a bitwise AND with 1 (which is 00000001 in an 8-bit representation), all bits except the least significant bit are effectively masked out. The result will be 0 if the number is even, and 1 if the number is odd.</p>
+
+            <div class="bg-slate-100 p-4 rounded-lg mb-8">
+                <h3 class="text-lg font-semibold mb-3">Example:</h3>
+                <div class="code-block">
+Decimal 5 (Odd):  00000101
+AND 1:            00000001
+--------------------------
+Result:           00000001 (Decimal 1)
+
+Decimal 4 (Even): 00000100
+AND 1:            00000001
+--------------------------
+Result:           00000000 (Decimal 0)
+                </div>
+            </div>
+
+            <p class="text-slate-700 leading-relaxed">This is equivalent to checking the remainder when dividing by 2 (N % 2), but often faster at a low level of computation.</p>
+        </section>
+
+        <!-- NEW: Shifts and Rotations -->
+        <section id="shifts-rotations" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Bitwise Shifts and Rotations</h2>
+            <p class="text-slate-700 leading-relaxed mb-6">Bitwise shifts and rotations move the bits of a binary number to the left or right. These operations are crucial for low-level programming, optimizing calculations, and manipulating data at the bit level.</p>
+
+            <div class="bg-slate-100 p-4 rounded-lg mb-8">
+                <h3 class="text-lg font-semibold mb-3">Definitions:</h3>
+                <dl class="space-y-3">
+                    <div>
+                        <dt class="font-semibold text-slate-800">Left Shift (N &lt;&lt; K)</dt>
+                        <dd class="text-slate-600 ml-4">Moves all bits to the left by K positions. Zeros are filled in from the right. This is equivalent to multiplying the number by 2<sup>K</sup>. Bits shifted off the left end are lost.</dd>
+                    </div>
+                    <div>
+                        <dt class="font-semibold text-slate-800">Right Shift (N &gt;&gt; K)</dt>
+                        <dd class="text-slate-600 ml-4">Moves all bits to the right by K positions. For unsigned numbers, zeros are filled in from the left (logical right shift). For signed numbers, the sign bit is usually replicated (arithmetic right shift) to preserve the sign. This is equivalent to dividing the number by 2<sup>K</sup> (integer division).</dd>
+                    </div>
+                    <div>
+                        <dt class="font-semibold text-slate-800">Left Rotate</dt>
+                        <dd class="text-slate-600 ml-4">Moves all bits to the left by K positions. Bits shifted off the left end are "rotated" back in on the right end. No bits are lost.</dd>
+                    </div>
+                    <div>
+                        <dt class="font-semibold text-slate-800">Right Rotate</dt>
+                        <dd class="text-slate-600 ml-4">Moves all bits to the right by K positions. Bits shifted off the right end are "rotated" back in on the left end. No bits are lost.</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-4 text-center">Interactive Byte Shifter/Rotator</h3>
+            <p class="text-center text-slate-600 mb-6">Manipulate an 8-bit number using shift and rotate operations. Click the bits to toggle them, then use the buttons to see the effects.</p>
+
+            <div id="shift-rotate-calculator" class="flex justify-center items-end flex-wrap space-x-2 md:space-x-3 mb-6">
+                <!-- Bits will be generated by JS -->
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <h3 class="font-semibold mb-2 text-center">Decimal Value</h3>
+                    <div id="shift-rotate-decimal-output" class="output-box">0</div>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2 text-center">Hexadecimal Value</h3>
+                    <div id="shift-rotate-hex-output" class="output-box">00</div>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-4 flex-wrap gap-4">
+                <button id="shift-left-btn" class="btn btn-primary">Shift Left (&lt;&lt; 1)</button>
+                <button id="shift-right-btn" class="btn btn-primary">Shift Right (&gt;&gt; 1)</button>
+                <button id="rotate-left-btn" class="btn btn-primary">Rotate Left</button>
+                <button id="rotate-right-btn" class="btn btn-primary">Rotate Right</button>
+            </div>
+        </section>
+
+        <!-- NEW: Binary-Coded Decimal (BCD) -->
+        <section id="bcd-numbers" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Binary-Coded Decimal (BCD)</h2>
+            <p class="text-slate-700 leading-relaxed space-y-4">
+                <strong>Binary-Coded Decimal (BCD)</strong> is a way to represent decimal numbers where each decimal digit is represented by its own 4-bit binary code (a nibble). For example, the decimal number 123 would be represented as `0001 0010 0011` in BCD.
+            </p>
+            <p class="text-slate-700 leading-relaxed space-y-4">
+                While it might seem less efficient than pure binary (since 4 bits can represent 0-15, but BCD only uses 0-9), BCD has some advantages:
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>Exact Decimal Representation:</strong> BCD avoids the fractional errors that can occur when converting decimal fractions to binary floating-point numbers. This is critical in financial and commercial applications where exact decimal arithmetic is required.</li>
+                    <li><strong>Easier Conversion to Decimal Displays:</strong> Converting BCD to a human-readable decimal display (like on old calculators or digital clocks) is straightforward, as each 4-bit group directly maps to a decimal digit.</li>
+                </ul>
+            </p>
+            <p class="text-slate-700 leading-relaxed space-y-4">
+                Is it used anymore? Yes, BCD is still used in specific applications where decimal precision is paramount, such as:
+                <ul class="list-disc list-inside space-y-2">
+                    <li>Financial software and databases</li>
+                    <li>Digital clocks and meters</li>
+                    <li>Some embedded systems and microcontrollers</li>
+                </ul>
+                However, for general-purpose computing, pure binary and floating-point representations are far more common due to their efficiency in storage and computation.
+            </p>
+        </section>
+
+        <!-- NEW: Weird Things -->
+        <section id="weird-things" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Weird Things with Bits</h2>
+
+            <!-- XOR Swap -->
+            <h3 class="text-xl font-semibold mb-3">Swapping Two Values with Three XORs</h3>
+            <p class="text-slate-700 leading-relaxed mb-4">This is a classic bitwise trick to swap the values of two variables without needing a temporary third variable. It leverages the properties of the XOR operation (A XOR A = 0 and A XOR B XOR B = A).</p>
+            <div class="bg-slate-100 p-4 rounded-lg mb-6">
+                <h4 class="font-semibold mb-2">The Algorithm:</h4>
+                <div class="code-block">
+a = a ^ b; (a now holds A XOR B)
+b = a ^ b; (b now holds (A XOR B) XOR B = A)
+a = a ^ b; (a now holds (A XOR B) XOR A = B)
+                </div>
+            </div>
+
+            <hr class="my-6 border-slate-300">
+
+            <!-- XOR CX, CX vs MOV CX, 0 -->
+            <h3 class="text-xl font-semibold mb-3">XOR CX, CX vs. MOV CX, 0 (Assembly Optimization)</h3>
+            <p class="text-slate-700 leading-relaxed mb-4">In older Intel x86 assembly languages, a common optimization trick was to use <code>XOR CX, CX</code> to set the <code>CX</code> register to zero, instead of using <code>MOV CX, 0</code>.</p>
+            <div class="bg-slate-100 p-4 rounded-lg mb-6">
+                <h4 class="font-semibold mb-2">Why was this faster?</h4>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>Instruction Size:</strong> <code>XOR CX, CX</code> is a shorter instruction (fewer bytes) than <code>MOV CX, 0</code>. Smaller instructions can be fetched and decoded faster.</li>
+                    <li><strong>Execution Units:</strong> On older processors, the XOR instruction could often be executed on a dedicated arithmetic logic unit (ALU) that was already available and optimized for bitwise operations, potentially freeing up other units (like those handling memory moves) for other tasks.</li>
+                    <li><strong>No Immediate Value:</strong> <code>MOV CX, 0</code> requires the processor to fetch an immediate value (the '0') from memory or instruction stream. <code>XOR CX, CX</code> operates directly on the register's current value, which is already available in the CPU.</li>
+                </ul>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+                While this optimization was significant in the days of limited cache and simpler pipeline architectures, modern CPUs have highly sophisticated pipelines, out-of-order execution, and predictive capabilities. Compilers are also much smarter. Today, the performance difference between <code>XOR REG, REG</code> and <code>MOV REG, 0</code> is often negligible, and sometimes <code>MOV</code> can even be faster due to specific micro-architectural optimizations (e.g., zeroing idioms). However, it remains a fascinating example of low-level optimization.
+            </p>
+        </section>
+
+        <!-- NEW: Language Specifics -->
+        <section id="language-specifics" class="concept-card">
+            <h2 class="text-2xl font-bold mb-4">Language Specifics: Numbers and Bitwise Operations</h2>
+            <p class="text-slate-700 leading-relaxed mb-6">Different programming languages provide various ways to represent numbers in different bases and perform bitwise operations. Here's a quick overview for common languages like C, Java, JavaScript, and Python:</p>
+
+            <div class="space-y-6 text-slate-700">
+                <div>
+                    <h3 class="text-xl font-semibold mb-3">Number Literals</h3>
+                    <ul class="list-disc list-inside ml-4 space-y-2">
+                        <li><strong>Decimal:</strong> Standard base-10 numbers (e.g., <code>123</code>) are written without any special prefix in all these languages.</li>
+                        <li><strong>Binary:</strong> Typically prefixed with <code>0b</code> or <code>0B</code> (e.g., <code>0b1011</code>). This is supported in Java 7+, C++14+, JavaScript (ES6+), and Python.</li>
+                        <li><strong>Hexadecimal:</strong> Universally prefixed with <code>0x</code> or <code>0X</code> (e.g., <code>0xFF</code>).</li>
+                        <li><strong>Octal:</strong>
+                            <ul class="list-circle list-inside ml-4">
+                                <li>In C and Java, octal numbers are prefixed with a single <code>0</code> (e.g., <code>0755</code>).</li>
+                                <li>In Python, they are prefixed with <code>0o</code> or <code>0O</code> (e.g., <code>0o755</code>).</li>
+                                <li>In JavaScript, the <code>0</code> prefix for octal is deprecated in strict mode; explicit octal literals use <code>0o</code> or <code>0O</code> (ES6+).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-3">Binary Operations</h3>
+                    <p class="text-slate-700 leading-relaxed">The core bitwise operations use very similar syntax across C, Java, JavaScript, and Python:</p>
+                    <ul class="list-disc list-inside ml-4 space-y-2">
+                        <li><strong>AND:</strong> <code>&</code> (e.g., <code>a & b</code>)</li>
+                        <li><strong>OR:</strong> <code>|</code> (e.g., <code>a | b</code>)</li>
+                        <li><strong>XOR (Exclusive OR):</strong> <code>^</code> (e.g., <code>a ^ b</code>)</li>
+                        <li><strong>NOT (Bitwise Complement):</strong> <code>~</code> (e.g., <code>~a</code>).
+                            <ul class="list-circle list-inside ml-4">
+                                <li>Note for Python: <code>~x</code> is equivalent to <code>-x - 1</code> due to Python's handling of arbitrary precision integers.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Left Shift:</strong> <code>&lt;&lt;</code> (e.g., <code>a &lt;&lt; 2</code>). This generally multiplies the number by powers of 2.</li>
+                        <li><strong>Right Shift:</strong> <code>&gt;&gt;</code> (e.g., <code>a &gt;&gt; 2</code>). This generally divides the number by powers of 2.
+                            <ul class="list-circle list-inside ml-4">
+                                <li>In C, Java, and Python, this is typically an *arithmetic* right shift for signed numbers (preserving the sign bit).</li>
+                                <li>JavaScript also has an *unsigned* right shift operator <code>&gt;&gt;&gt;</code> which always fills with zeros from the left.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Rotations:</strong> Direct bitwise rotation operators are generally *not* available in these high-level languages. They are typically implemented manually using a combination of shift and OR operations, often requiring consideration of the specific bit width (e.g., 8-bit, 32-bit).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+<!--        <footer class="text-center mt-12 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Conclusion & Next Steps</h2>
+            <p class="text-slate-600 max-w-3xl mx-auto">Congratulations! You've taken a big step towards understanding the fundamental language of computers. These concepts are the foundation for more advanced topics in computer science. From here, you could explore computer architecture, data structures, or how programming languages compile down to machine code.<br /><br />Mikko K&auml;renlampi<br />mikko.karenlampi@gmail.com
+            </p>
+        </footer>
+-->
+
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="./numerical.js"></script>
+
+</body>
+</html>
